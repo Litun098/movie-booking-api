@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const constants = require('../utils/constants')
 
 const movieSchema = mongoose.Schema({
     name:{
@@ -36,7 +37,7 @@ const movieSchema = mongoose.Schema({
     releaseStatus:{
         type:String,
         required:true,
-        default:"RELEASED",
+        default:constants.releaseStatus.released,
     }
 })
 
