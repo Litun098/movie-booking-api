@@ -7,24 +7,24 @@ require('dotenv').config();
 
 const app = express();
 
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 
-mongoose.connect(dbConfig.db_url,()=>{
+mongoose.connect(dbConfig.db_url, () => {
     console.log("Connected to MongoDB");
-},err=>{
+}, err => {
     console.log(err.message);
 })
 
 require('./routes/movie.routes')(app);
 require('./routes/theatre.routes')(app);
 
-app.get('/', (req,res)=>{
+app.get('/', (req, res) => {
     res.send("Inside Movie Booking application.");
 })
 
 
 
-app.listen(serverConfig.port,()=>{
-    console.log("Application running on port",serverConfig.port);
+app.listen(serverConfig.port, () => {
+    console.log("Application running on port", serverConfig.port);
 })
