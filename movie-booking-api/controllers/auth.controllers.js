@@ -3,6 +3,7 @@ const express = require('express');
 const User = require('../models/user');
 const constants = require('../utils/constants');
 const jwt = require('jsonwebtoken');
+const config = require('../configs/auth.config');
 
 exports.signip = async (req, res) => {
     var userStatus;
