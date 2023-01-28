@@ -2,47 +2,47 @@ const User = require("../models/user.model");
 const constants = require("../utils/constants");
 
 
-validateUserRequestBody = async (req,res,next)=>{
+validateUserRequestBody = async (req, res, next) => {
 
     //validating name 
-    if(!req.body.name){
-        return res.status(400).send({message:"Failed! Name is not provided"})
+    if (!req.body.name) {
+        return res.status(400).send({ message: "Failed! Name is not provided" })
     }
 
-       //validating userId 
-       if(!req.body.userId){
-        return res.status(400).send({message:"Failed! userId is not provided"})
+    //validating userId 
+    if (!req.body.userId) {
+        return res.status(400).send({ message: "Failed! userId is not provided" })
     }
 
-    const user = await User.findOne({userId:req.body.userId});
+    const user = await User.findOne({ userId: req.body.userId });
 
-    if(user!=null){
-        return res.status(400).send({message:"Failed! userId already exists"});
+    if (user != null) {
+        return res.status(400).send({ message: "Failed! userId already exists" });
     }
 
-       //validating email 
-       if(!req.body.email){
-        return res.status(400).send({message:"Failed! email is not provided"})
+    //validating email 
+    if (!req.body.email) {
+        return res.status(400).send({ message: "Failed! email is not provided" })
     }
 
-    const email = await User.findOne({email:req.body.email});
+    const email = await User.findOne({ email: req.body.email });
 
-    if(email!=null){
-        return res.status(400).send({message:"Failed! email already exists"});
+    if (email != null) {
+        return res.status(400).send({ message: "Failed! email already exists" });
     }
 
     //validate userType
 
-    const userTypes =[constants.userType.admin, constants.userType.client, constants.userType.customer];
+    const userTypes = [constants.userType.admin, constants.userType.client, constants.userType.customer];
 
-    if(req.body.userType && !userTypes.includes(req.body.userType)){
-        return res.status(400).send({message:`Failed! usertype should be among: ${userTypes}`});
+    if (req.body.userType && !userTypes.includes(req.body.userType)) {
+        return res.status(400).send({ message: `Failed! usertype should be among: ${userTypes}` });
     }
-    
+
     next();
 
 }
 
-module.exports={
+module.exports = {
     validateUserRequestBody
 }

@@ -1,50 +1,50 @@
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 
-exports.update = async (req,res)=>{
+exports.update = async (req, res) => {
     const userId = req.userId;
 
-    if(!req.body.password){
-        return res.status(400).send({message:"Please enter password"});
+    if (!req.body.password) {
+        return res.status(400).send({ message: "Please enter password" });
     }
 
-    try{
+    try {
         const user = await User.findByIdAndUpdate({
-            userId:userId
-        },{
-            password:bcrypt.hashSync(req.body.password,10)
+            userId: userId
+        }, {
+            password: bcrypt.hashSync(req.body.password, 10)
         });
 
         res.status(200).send({
-            message:"Password updated successfully."
+            message: "Password updated successfully."
         })
-    }catch(err){
-        return res.status(500).send({message:"Something went wrong."})
+    } catch (err) {
+        return res.status(500).send({ message: "Something went wrong." })
     }
 }
 
-exports.updateUser = async (req,res)=>{
+exports.updateUser = async (req, res) => {
     const userId = req.params.userId;
 
-    try{
+    try {
         const user = await User.findOneAndUpdate({
-            userId:userId
-        },{
-            userStatus:req.body.userStatus
+            userId: userId
+        }, {
+            userStatus: req.body.userStatus
         })
 
-        if(!user){
+        if (!user) {
             return res.status(400).send({
-                message:"Invalid user Id"
+                message: "Invalid user Id"
             })
         }
 
         return res.status(200).send({
-            message:"User record has been updated successfully"
+            message: "User record has been updated successfully"
         })
-    }catch(err){
+    } catch (err) {
         return res.status(500).send({
-            message:"Something went wrong."
+            message: "Something went wrong."
         })
     }
 }

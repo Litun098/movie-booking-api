@@ -38,21 +38,20 @@ app.listen(serverConfig.port, () => {
     console.log("Application running on port", serverConfig.port);
 })
 
-async function init(){
+async function init() {
 
-    try{
+    try {
         const user = await User.create({
-            name:"admin",
-            userId:"admin",
-            email:"admin@gmail.com",
-            password:bcrypt.hashSync("admin",10),
-            userStatus:constants.userStatus.approved,
-            userTypes:constants.userTypes.admin
+            name: "admin",
+            userId: "admin",
+            email: "admin@gmail.com",
+            password: bcrypt.hashSync("admin", 10),
+            userStatus: constants.userStatus.approved,
+            userTypes: constants.userTypes.admin
         });
 
         console.log("Admin user created successfully");
-    }catch(e){
+    } catch (e) {
         console.log(e.message);
     }
-
 }

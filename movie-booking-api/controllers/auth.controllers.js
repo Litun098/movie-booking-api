@@ -18,7 +18,7 @@ exports.signup = async (req, res) => {
         name: req.body.name,
         userId: req.body.userId,
         email: req.body.email,
-        password: bcrypt.hashSync(req.body.password,10),
+        password: bcrypt.hashSync(req.body.password, 10),
         userStatus: userStatus,
         userType: req.body.userType
     }
@@ -36,39 +36,39 @@ exports.signup = async (req, res) => {
     }
 }
 
-exports.signin = async(req, res)=>{
-    const {userId,password} = req.body;
+exports.signin = async (req, res) => {
+    const { userId, password } = req.body;
 
-    const user = await User.findOne({userId});
+    const user = await User.findOne({ userId });
 
-    if(!user){
+    if (!user) {
         return res.status(400).send({
-            message:"User id does not exists"
+            message: "User id does not exists"
         })
     }
 
-    if(user.userStatus !== constants.userStatus.approved){
+    if (user.userStatus !== constants.userStatus.approved) {
         return res.status(403).send({
-            message:"Not authorized!"
+            message: "Not authorized!"
         })
     }
 
-    let isCorrectPassord = bcrypt.compareSync(password,user.password);
+    let isCorrectPassord = bcrypt.compareSync(password, user.password);
 
-    if(!isCorrectPassord){
+    if (!isCorrectPassord) {
         return res.status(401).send({
-            message:"Username or password incorrect."
+            message: "Username or password incorrect."
         })
     }
 
-    const token = jwt.sign({id:user.userId},config.secret,{expiresIn:120});
+    const token = jwt.sign({ id: user.userId }, config.secret, { expiresIn: 120 });
 
     return res.status(200).send({
-        name:user.name,
-        userId:user.userId,
-        email:user.email,
-        userType:user.userTypes,
-        userStatus:user.userStatus,
-        accessToken:token,
+        name: user.name,
+        userId: user.userId,
+        email: user.email,
+        userType: user.userTypes,
+        userStatus: user.userStatus,
+        accessToken: token,
     })
 }

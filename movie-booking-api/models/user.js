@@ -2,35 +2,35 @@ const mongoose = require("mongoose");
 const constants = require("../utils/constants");
 
 const userSchema = new mongoose.Schema({
-    name:{
-        type:String,
-        required:true
+    name: {
+        type: String,
+        required: true
     },
-    userId:{
-        type:String,
-        required:true,
-        unique:true
+    userId: {
+        type: String,
+        required: true,
+        unique: true
     },
-    password:{
-        type:String,
-        required:true
+    password: {
+        type: String,
+        required: true
     },
-    email:{
-        type:String,
-        required:true,
-        lowercase:true,
-        unique:true,
-        minLenth:10
+    email: {
+        type: String,
+        required: true,
+        lowercase: true,
+        unique: true,
+        minLenth: 10
     },
-    userTypes:{
-        type:String,
-        required:true,
-        default:constants.userType.customer,
-        uppercase:true
+    userTypes: {
+        type: String,
+        required: true,
+        default: constants.userType.customer,
+        uppercase: true
     },
-    userStatus:{
-        type:String,
-        required:true,
+    userStatus: {
+        type: String,
+        required: true,
     }
 })
 
