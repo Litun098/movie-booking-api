@@ -33,7 +33,7 @@ validateUserRequestBody = async (req,res,next)=>{
 
     //validate userType
 
-    const userTypes =[constants.userTypes.admin, constants.userType.client, constants.userType.customer];
+    const userTypes =[constants.userType.admin, constants.userType.client, constants.userType.customer];
 
     if(req.body.userType && !userTypes.includes(req.body.userType)){
         return res.status(400).send({message:`Failed! usertype should be among: ${userTypes}`});

@@ -53,7 +53,7 @@ exports.signin = async(req, res)=>{
         })
     }
 
-    let isCorrectPassord = bcrypt.compareSync(req.body.password,user.password);
+    let isCorrectPassord = bcrypt.compareSync(password,user.password);
 
     if(!isCorrectPassord){
         return res.status(401).send({
@@ -67,7 +67,7 @@ exports.signin = async(req, res)=>{
         name:user.name,
         userId:user.userId,
         email:user.email,
-        userType:user.userType,
+        userType:user.userTypes,
         userStatus:user.userStatus,
         accessToken:token,
     })

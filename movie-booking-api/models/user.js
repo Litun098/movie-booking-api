@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
     userTypes:{
         type:String,
         required:true,
-        default:constants.userTypes.customer,
+        default:constants.userType.customer,
         uppercase:true
     },
     userStatus:{
