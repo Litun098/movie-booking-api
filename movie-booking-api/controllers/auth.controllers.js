@@ -5,7 +5,7 @@ const constants = require('../utils/constants');
 const jwt = require('jsonwebtoken');
 const config = require('../configs/auth.config');
 
-exports.signip = async (req, res) => {
+exports.signup = async (req, res) => {
     var userStatus;
 
     if (!req.body.userType || req.body.userType == constants.userType.customer) {
