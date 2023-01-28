@@ -1,4 +1,6 @@
 const Movie = require('../models/movie');
+const theatre = require('../models/theatre');
+const Theatre = require('../models/theatre');
 
 exports.createMovie = async (req, res) => {
     try {
@@ -13,8 +15,13 @@ exports.createMovie = async (req, res) => {
 }
 
 exports.getAllMovies = async (req, res) => {
+    
+    const query = {};
+    if(req.query.name != undefined){
+        query.name = req.query.name;
+    }
     try {
-        const movie = await Movie.find();
+        const movie = await Movie.find(query);
         return res.status(201).send(movie);
     } catch (err) {
         console.log(err.message);
@@ -72,10 +79,34 @@ exports.deleteMovie = async (req, res) => {
         const results = await Movie.findOneAndDelete({
             _id: req.params.id
         })
+        return res.status(200).send({
+            message:`Successfully deleted movie with Id ${req.params.id}`
+        })
     } catch (err) {
         console.log(err.message);
         return res.status(500).send({
             message: "Something went wrong."
+        })
+    }
+}
+
+exports.getTheatresForMovie = async (req,res)=>{
+    const movie = req.params.movieId;
+    try{
+
+        const savedMovie = await Movie.findById({_id:movie});
+        
+        if(!savedMovie){
+            return res.status(400).send({message:"Invalid movie id"});
+        }
+        
+        const savedTheatre = await Theatre.find();
+        const validTheatres = savedTheatre.filter(theatre=>theatre.movies.includes(movie));
+        
+        return res.status(200).send(validTheatres);
+    }catch(err){
+        return res.status.send({
+            message:"Something went wrong."
         })
     }
 }
