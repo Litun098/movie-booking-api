@@ -1,18 +1,3 @@
-const Movie = require('../models/movie');
-const theatre = require('../models/theatre');
-const Theatre = require('../models/theatre');
-
-exports.createMovie = async (req, res) => {
-    try {
-        const movie = await Movie.create(req.body);
-        return res.status(201).send(movie);
-    } catch (err) {
-        console.log(err.message);
-        return res.status(500).send({
-            message: "Something went wrong."
-        })
-    }
-}
 
 exports.getAllMovies = async (req, res) => {
 

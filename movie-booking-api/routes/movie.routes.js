@@ -8,5 +8,5 @@ module.exports = function (app) {
     app.get("/mba/api/v1/movies/:id", [verifyToken], movieController.getMovie)
     app.put("/mba/api/v1/movies/:id", [verifyToken, isAdmin], movieController.updateMovie)
     app.delete("/mba/api/v1/movies/:id", [verifyToken, isAdmin], movieController.deleteMovie)
-    app.get("/mba/api/v1/movies/:movieId/theatres", [verifyToken], movieController.getTheatresForAMovie);
+    app.get("/mba/api/v1/movies/:movieId/theatres", [verifyToken], movieController.getTheatresForMovie);
 }
