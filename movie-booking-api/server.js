@@ -10,8 +10,11 @@ const serverConfig = require("./configs/server.config");
 const dbConfig = require("./configs/db.config");
 const constants = require("./utils/constants");
 
-
+var cors = require('cors')
 const app = express();
+
+
+app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())

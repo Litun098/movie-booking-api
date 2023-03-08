@@ -1,14 +1,15 @@
-const releaseStatus = {
 
-    released: "RELEASED",
-    unreleased: "UNRELEASED",
-    blocked: "BLOCKED"
+const releaseStatus={
+
+    released:"RELEASED",
+    unreleased:"UNRELEASED",
+    blocked:"BLOCKED"
 }
 
-const userType = {
-    customer: "CUSTOMER",
-    client: "CLIENT",
-    admin: "ADMIN"
+const userTypes ={
+    customer:"CUSTOMER",
+    client:"CLIENT",
+    admin:"ADMIN"
 }
 
 const userStatus = {
@@ -32,11 +33,10 @@ const paymentStatus = {
 }
 
 module.exports = {
-    releaseStatus: releaseStatus,
-    userType,
+    releaseStatus:releaseStatus,
+    userTypes,
     userStatus,
     ticketPrice:250,
     bookingStatus,
     paymentStatus
 }
-

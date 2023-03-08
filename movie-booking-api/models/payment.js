@@ -8,13 +8,18 @@ const paymentSchema = new mongoose.Schema({
         ref:"Booking"
     },
     amount:{
-        type:String,
+        type:Number,
         required:true,
     },
     status:{
         type:String,
+        require:true,
+        default:paymentStatus.pending,
+    },
+    createdAt:{
+        type:Date,
         immutable:true,
-        default: () =>{
+        default: ()=>{
             return Date.now();
         }
     },

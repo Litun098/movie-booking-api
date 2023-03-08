@@ -4,6 +4,8 @@ const User = require('../models/user');
 const constants = require('../utils/constants');
 const jwt = require('jsonwebtoken');
 const config = require('../configs/auth.config');
+const notificationClient = require("../utils/NotificationClient");
+const { userRegistration } = require("../scripts/emailScripts");
 
 exports.signup = async (req, res) => {
     var userStatus;
@@ -25,6 +27,8 @@ exports.signup = async (req, res) => {
 
     try {
         const user = await User.create(userObject);
+        const { subject, html, text } = userRegistration(user);
+        notificationClient.sendEmail([user.email], subject, html, text);
         res.status(201).send({
             message: "Signed up successfully.",
             user: user
@@ -61,7 +65,7 @@ exports.signin = async (req, res) => {
         })
     }
 
-    const token = jwt.sign({ id: user.userId }, config.secret, { expiresIn: 120 });
+    const token = jwt.sign({ id: user.userId }, config.secret, { expiresIn: 120000 });
 
     return res.status(200).send({
         name: user.name,

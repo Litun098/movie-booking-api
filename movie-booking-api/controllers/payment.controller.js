@@ -21,6 +21,9 @@ exports.createNewPayment = async (req, res) => {
         })
     }
 
+    //make a call to razorpay payment API 
+    //return reponse 
+    //response will have status of payment 
 
     const rozerpayAPIResponse = {
         paymentStatus: constants.paymentStatus.success
@@ -34,6 +37,8 @@ exports.createNewPayment = async (req, res) => {
 
     try {
         const payment = await Payment.create(paymentObj);
+
+        //send an email to the customer
 
         savedBooking.status = (paymentObj.status == constants.paymentStatus.success) ? constants.bookingStatus.completed : constants.bookingStatus.failed
 
